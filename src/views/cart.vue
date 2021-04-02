@@ -16,11 +16,6 @@
           >
           </el-checkbox>
         </template>
-        <!--
-          @change="updateProductChecked"  默认参数：更新后的值
-          @change="updateProductChecked(productId, $event)"  123, 原来那个默认参数
-            当你传递了自定义参数的时候，还想得到原来那个默认参数，就手动传递一个 $event
-         -->
         <template v-slot="scope">
           <el-checkbox
             size="mini"
@@ -62,7 +57,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters, mapMutations, mapState} from 'vuex'
 export default {
