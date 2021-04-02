@@ -11,9 +11,7 @@
       <el-table-column
         width="55">
         <template v-slot:header>
-          <el-checkbox size="mini"
-             v-model="checkedAll"
-          >
+          <el-checkbox size="mini">
           </el-checkbox>
         </template>
         <!--
@@ -25,7 +23,6 @@
           <el-checkbox
             size="mini"
             :value="scope.row.isChecked"
-            @change="updateProductChecked({checked: !scope.row.isChecked,productId: scope.row.id})"
           >
           </el-checkbox>
         </template>
@@ -41,8 +38,8 @@
       <el-table-column
         prop="count"
         label="数量">
-        <template v-slot="{row}">
-          <el-input-number size="mini" :min="0" :value="row.count" @change="updateProduct({count: $event,id: row.id})"></el-input-number>
+        <template>
+          <el-input-number size="mini"></el-input-number>
         </template>
       </el-table-column>
       <el-table-column
@@ -51,38 +48,30 @@
       </el-table-column>
       <el-table-column
         label="操作">
-        <template v-slot='{row}'>
-          <el-button @click="deleteFormCart(row.id)" size="mini">删除</el-button>
+        <template>
+          <el-button size="mini">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <div>
-      <p>已选 <span>{{checkedCount}}</span> 件商品，总价：<span>{{checkedPrice}}</span></p>
+      <p>已选 <span>xxx</span> 件商品，总价：<span>xxx</span></p>
       <el-button type="danger">结算</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState} from 'vuex'
+
 export default {
   name: 'Cart',
-  computed: {
-    ...mapState('cart', ['cartProducts']),...mapGetters('cart',['totalCount','totalPrice','checkedCount','checkedPrice']),
-    checkedAll: {
-      get() {
-         const result =   this.cartProducts.length > 0 &&  this.cartProducts.every(prod => prod.isChecked);
-         return result
-      },
-      set(checked) {
-         console.log('checked',checked)
-         this.updateAllProductChecked(checked);
-      }
+  data () {
+    return {
+      cartProducts: [
+        { id: 1, title: 'iPad Pro', price: 500.01 },
+        { id: 2, title: 'H&M T-Shirt White', price: 10.99 },
+        { id: 3, title: 'Charli XCX - Sucker CD', price: 19.99 }
+      ]
     }
-  },
-  methods: {
-    ...mapMutations('cart', ['updateAllProductChecked','updateProductChecked','updateProduct'
-      ,'deleteFormCart'])
   }
 }
 </script>
